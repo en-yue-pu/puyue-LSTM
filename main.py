@@ -11,19 +11,23 @@ df = pd.read_csv('TSLA.csv')
 # 只保留收盘价这一列
 df = df['Close']
 # 将数据转换为 numpy 数组
-data = df.values
+data = df.values #168个数据全在的数组
 # 定义训练集和测试集的大小
-train_size = int(len(data) * 0.8)
-test_size = len(data) - train_size
+train_size = int(len(data) * 0.8) #168*0.8=134.4 取整
+print(train_size)
+test_size = len(data) - train_size #168-134 = 34
+print(test_size)
 # 分割训练集和测试集
-train_data = data[:train_size]
-test_data = data[train_size:]
+train_data = data[:train_size] #[:134] 取前134个训练
+test_data = data[test_size:] #[34:] 取后34个测试
 # 创建一个归一化对象
 scaler = MinMaxScaler()
 # 对训练集进行归一化
 train_data = scaler.fit_transform(train_data.reshape(-1, 1))
+print(train_data.shape)
 # 对测试集进行归一化
 test_data = scaler.transform(test_data.reshape(-1, 1))
+print(test_data.shape)
 # 定义一个函数，根据过去 n 天的数据来生成输入和输出
 def create_dataset(data, n):
     x = []
@@ -51,8 +55,8 @@ model.add(Dropout(0.2))
 model.add(Dense(1))
 # 编译模型，使用均方误差作为损失函数，使用 Adam 优化器
 model.compile(loss='mean_squared_error', optimizer='adam')
-# 训练模型，使用 20 个周期，每个批次 32 个样本
-model.fit(x_train, y_train, epochs=20, batch_size=32)
+# 训练模型，使用 20 个周期，每个批次 30 个样本
+model.fit(x_train, y_train, epochs=20, batch_size=30)
 # 预测测试集的股价
 y_pred = model.predict(x_test)
 # 反归一化预测结果和真实结果

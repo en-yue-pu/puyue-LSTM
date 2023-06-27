@@ -14,8 +14,16 @@ python3.8(3.9和以后不能用)
 使用 fit 方法来训练模型，使用 predict 方法来预测测试集中的股价。
 使用 matplotlib 库来绘制预测结果和真实结果的对比图，评估模型的表现。
 
+实际上CSV文件应该是这样的
+Date,Open,High,Low,Close,Adj Close,Volume
+2010-06-29,19.000000,25.000000,17.540001,23.889999,23.889999,18766300
+2010-06-30,25.790001,30.420000,23.299999,23.830000,23.830000,17187100
+.....
+但是只看收盘价close这一列所以其他省略
+
 usage
 pip install -r requirements.txt 
 python main.py
 
 <img width="637" alt="截屏2023-06-27 23 50 25" src="https://github.com/yue-pu/puyue-LSTM/assets/117700148/e1c4afc2-3d46-4257-8f74-09bab7569b30">
+数据中出现价格大跳水应该是分股 这个数据不好

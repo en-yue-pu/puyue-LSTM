@@ -65,6 +65,16 @@ y_train = scaler.inverse_transform([y_train])
 test_predict = scaler.inverse_transform(test_predict)
 y_test = scaler.inverse_transform([y_test])
 
-# Print the predictions
-print("Training set predictions: ", train_predict)
-print("Test set predictions: ", test_predict)
+# Get the dates from the index
+train_dates = data.index[look_back:len(train_predict)+look_back]
+test_dates = data.index[len(train_predict)+(look_back*2)+1:len(data)-1]
+
+# Convert predictions to dataframes for easier handling
+train_df = pd.DataFrame(data=train_predict, index=train_dates, columns=['Value'])
+test_df = pd.DataFrame(data=test_predict, index=test_dates, columns=['Value'])
+
+# Print the predictions with dates
+print("Training set predictions: ")
+print(train_df)
+print("Test set predictions: ")
+print(test_df)

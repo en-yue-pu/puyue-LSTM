@@ -73,8 +73,6 @@ test_dates = data.index[len(train_predict)+(look_back*2)+1:len(data)-1]
 train_df = pd.DataFrame(data=train_predict, index=train_dates, columns=['Value'])
 test_df = pd.DataFrame(data=test_predict, index=test_dates, columns=['Value'])
 
-# Print the predictions with dates
-print("Training set predictions: ")
-print(train_df)
-print("Test set predictions: ")
-print(test_df)
+# Save the predictions to CSV files
+train_df.to_csv('train_predictions.csv')
+test_df.to_csv('test_predictions.csv')
